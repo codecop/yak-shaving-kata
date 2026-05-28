@@ -6,6 +6,7 @@
 * We had it run tests.
 * We had it fix linter issues.
 * We had it analyse the code and write the results as task list.
+* Loop trough the tasks from list.
 
 ## Goal of the exercise
 
