@@ -23,7 +23,7 @@
 ### 5. Test Coverage Gaps
 
 - [x] Missing tests for edge cases
-- [ ] No tests for invalid order types
+- [x] No tests for invalid order types
 - [ ] Boundary conditions not tested
 - [ ] Subscription order type needs tests
 

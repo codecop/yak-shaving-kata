@@ -100,6 +100,36 @@ describe('calculatePrice', () => {
   });
 });
 
+describe('invalid order types', () => {
+  it('throws error for invalid order type', () => {
+    expect(() => calculatePrice('invalid' as any, 100)).toThrow();
+  });
+
+  it('throws error with descriptive message for invalid order type', () => {
+    expect(() => calculatePrice('invalid' as any, 100)).toThrow('Invalid order type: \'invalid\'. Valid types are: standard, premium, wholesale, subscription');
+  });
+
+  it('throws error for empty string order type', () => {
+    expect(() => calculatePrice('' as any, 100)).toThrow();
+  });
+
+  it('throws error for null order type', () => {
+    expect(() => calculatePrice(null as any, 100)).toThrow();
+  });
+
+  it('throws error for undefined order type', () => {
+    expect(() => calculatePrice(undefined as any, 100)).toThrow();
+  });
+
+  it('throws error for numeric order type', () => {
+    expect(() => calculatePrice(123 as any, 100)).toThrow();
+  });
+
+  it('throws error for object order type', () => {
+    expect(() => calculatePrice({} as any, 100)).toThrow();
+  });
+});
+
 describe('getOrderLabel', () => {
   it('returns correct label for each type', () => {
     expect(getOrderLabel('standard')).toBe('Standard Order');
