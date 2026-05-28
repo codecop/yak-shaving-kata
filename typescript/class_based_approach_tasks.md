@@ -31,48 +31,48 @@
 
 ### Phase 1: Base Class and Interface
 
-- [ ] Create abstract OrderType base class
-- [ ] Define interface with calculatePrice(), getLabel(), getPriority() methods
-- [ ] Add validation method for order-specific rules
+- [x] Create abstract OrderType base class
+- [x] Define interface with calculatePrice(), getLabel(), getPriority() methods
+- [x] Add validation method for order-specific rules
 
 ### Phase 2: Concrete Order Classes
 
-- [ ] Create StandardOrder class extending OrderType
-  - [ ] Implement calculatePrice() - returns base price
-  - [ ] Implement getLabel() - returns "Standard Order"
-  - [ ] Implement getPriority() - returns 1
-  - [ ] Implement validate() - no special validation
+- [x] Create StandardOrder class extending OrderType
+  - [x] Implement calculatePrice() - returns base price
+  - [x] Implement getLabel() - returns "Standard Order"
+  - [x] Implement getPriority() - returns 1
+  - [x] Implement validate() - no special validation
 
-- [ ] Create PremiumOrder class extending OrderType
-  - [ ] Implement calculatePrice() - applies 20% markup (1.2 multiplier)
-  - [ ] Implement getLabel() - returns "Premium Order"
-  - [ ] Implement getPriority() - returns 3
-  - [ ] Implement validate() - no special validation
+- [x] Create PremiumOrder class extending OrderType
+  - [x] Implement calculatePrice() - applies 20% markup (1.2 multiplier)
+  - [x] Implement getLabel() - returns "Premium Order"
+  - [x] Implement getPriority() - returns 3
+  - [x] Implement validate() - no special validation
 
-- [ ] Create WholesaleOrder class extending OrderType
-  - [ ] Implement calculatePrice() - applies 30% discount (0.7 multiplier)
-  - [ ] Implement getLabel() - returns "Wholesale Order"
-  - [ ] Implement getPriority() - returns 2
-  - [ ] Implement validate() - check minimum order amount ($50 threshold)
+- [x] Create WholesaleOrder class extending OrderType
+  - [x] Implement calculatePrice() - applies 30% discount (0.7 multiplier)
+  - [x] Implement getLabel() - returns "Wholesale Order"
+  - [x] Implement getPriority() - returns 2
+  - [x] Implement validate() - check minimum order amount ($50 threshold)
 
-- [ ] Create SubscriptionOrder class extending OrderType
-  - [ ] Implement calculatePrice() - applies 15% discount (0.85 multiplier)
-  - [ ] Implement getLabel() - returns "Subscription Order"
-  - [ ] Implement getPriority() - returns 4
-  - [ ] Implement validate() - no special validation
+- [x] Create SubscriptionOrder class extending OrderType
+  - [x] Implement calculatePrice() - applies 15% discount (0.85 multiplier)
+  - [x] Implement getLabel() - returns "Subscription Order"
+  - [x] Implement getPriority() - returns 4
+  - [x] Implement validate() - no special validation
 
 ### Phase 3: Factory Pattern
 
-- [ ] Create OrderFactory class
-- [ ] Implement createOrder() static method
-- [ ] Handle order type creation based on input
-- [ ] Throw descriptive error for invalid order types
+- [x] Create OrderFactory class
+- [x] Implement createOrder() static method
+- [x] Handle order type creation based on input
+- [x] Throw descriptive error for invalid order types
 
 ### Phase 4: Update Existing Functions
 
-- [ ] Modify calculatePrice() to use OrderFactory and call order.calculatePrice()
-- [ ] Modify getOrderLabel() to use OrderFactory and call order.getLabel()
-- [ ] Modify getOrderPriority() to use OrderFactory and call order.getPriority()
+- [x] Modify calculatePrice() to use OrderFactory and call order.calculatePrice()
+- [x] Modify getOrderLabel() to use OrderFactory and call order.getLabel()
+- [x] Modify getOrderPriority() to use OrderFactory and call order.getPriority()
 
 ### Phase 5: Testing
 
