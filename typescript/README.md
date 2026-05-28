@@ -1,12 +1,12 @@
 # Yak Shaving Kata
 
-A kata for practicing yak shaving.
+A kata for practising yak shaving.
 
 ## Constraints
 
 - Use TDD.
 - Never mix concerns in the same commit.
-- Never reuse the same context for unrelated changes — neither git branches nor agent sessions.
+- Never reuse the same context for unrelated changes - neither git branches nor agent sessions.
 - Shave the yaks in the right order.
 
 ## Your task
@@ -17,7 +17,7 @@ A subscription order applies a 15% discount to the base price (e.g. a base price
 
 ## Getting started
 
-```
+```[bash]
 npm install
 npm run build
 npm test
