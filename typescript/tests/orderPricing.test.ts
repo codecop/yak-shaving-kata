@@ -13,9 +13,21 @@ describe('calculatePrice', () => {
     expect(calculatePrice('wholesale', 200)).toBe(140);
   });
 
-  it('applies 30% discount for small wholesale orders', () => {
-    expect(calculatePrice('wholesale', 40)).toBe(28);
-  });
+    it('applies 30% discount for wholesale orders', () => {
+      expect(calculatePrice('wholesale', 100)).toBe(70);
+    });
+
+    it('throws error for wholesale orders below $50 minimum', () => {
+      expect(() => calculatePrice('wholesale', 49)).toThrow('Wholesale orders require a minimum base price of $50. Got: $49');
+    });
+
+    it('allows wholesale orders at exactly $50 minimum', () => {
+      expect(calculatePrice('wholesale', 50)).toBe(35);
+    });
+
+    it('allows wholesale orders above $50 minimum', () => {
+      expect(calculatePrice('wholesale', 51)).toBeCloseTo(35.7);
+    });
 
   describe('edge cases', () => {
     it('handles zero base price for standard orders', () => {
@@ -26,8 +38,8 @@ describe('calculatePrice', () => {
       expect(calculatePrice('premium', 0)).toBe(0);
     });
 
-    it('handles zero base price for wholesale orders', () => {
-      expect(calculatePrice('wholesale', 0)).toBe(0);
+    it('throws error for zero base price wholesale orders', () => {
+      expect(() => calculatePrice('wholesale', 0)).toThrow('Wholesale orders require a minimum base price of $50. Got: $0');
     });
 
     it('handles zero base price for subscription orders', () => {
@@ -42,8 +54,8 @@ describe('calculatePrice', () => {
       expect(calculatePrice('premium', -100)).toBe(-120);
     });
 
-    it('handles negative base price for wholesale orders', () => {
-      expect(calculatePrice('wholesale', -100)).toBe(-70);
+    it('throws error for negative base price wholesale orders', () => {
+      expect(() => calculatePrice('wholesale', -100)).toThrow('Wholesale orders require a minimum base price of $50. Got: $-100');
     });
 
     it('handles negative base price for subscription orders', () => {
@@ -90,8 +102,8 @@ describe('calculatePrice', () => {
       expect(calculatePrice('premium', 0.001)).toBeCloseTo(0.0012);
     });
 
-    it('handles very small fractional base prices for wholesale orders', () => {
-      expect(calculatePrice('wholesale', 0.001)).toBeCloseTo(0.0007);
+    it('throws error for very small fractional base prices for wholesale orders', () => {
+      expect(() => calculatePrice('wholesale', 0.001)).toThrow('Wholesale orders require a minimum base price of $50. Got: $0.001');
     });
 
     it('handles very small fractional base prices for subscription orders', () => {

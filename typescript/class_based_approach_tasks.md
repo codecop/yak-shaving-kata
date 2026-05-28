@@ -24,7 +24,7 @@
 
 - [x] Missing tests for edge cases
 - [x] No tests for invalid order types
-- [ ] Boundary conditions not tested
+- [x] Boundary conditions not tested
 - [ ] Subscription order type needs tests
 
 ## Class-Based Implementation Plan

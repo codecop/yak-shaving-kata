@@ -68,9 +68,11 @@ export class WholesaleOrder extends OrderType {
     return WHOLESALE_PRIORITY
   }
 
-  validate(basePrice: number): void {
-    // No special validation for wholesale orders (TODO: add $50 minimum per ticket #142)
-  }
+    validate(basePrice: number): void {
+      if (basePrice < WHOLESALE_MINIMUM) {
+        throw new Error(`Wholesale orders require a minimum base price of $${WHOLESALE_MINIMUM}. Got: $${basePrice}`)
+      }
+    }
 }
 
 export class SubscriptionOrder extends OrderType {
