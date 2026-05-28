@@ -97,8 +97,11 @@ export class OrderFactory {
         return new WholesaleOrder()
       case 'subscription':
         return new SubscriptionOrder()
-      default:
-        throw new Error(`Invalid order type: ${orderType}`)
+      default: {
+        // Improved error handling with descriptive message
+        const validTypes = ['standard', 'premium', 'wholesale', 'subscription']
+        throw new Error(`Invalid order type: '${orderType}'. Valid types are: ${validTypes.join(', ')}`)
+      }
     }
   }
 }
