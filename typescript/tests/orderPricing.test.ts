@@ -1,4 +1,5 @@
 import { calculatePrice, getOrderLabel, getOrderPriority, OrderType } from '../src/orderPricing';
+import { OrderFactory, StandardOrder, PremiumOrder, WholesaleOrder, SubscriptionOrder } from '../src/orderTypes';
 
 describe('calculatePrice', () => {
   it('returns base price for standard orders', () => {
@@ -208,5 +209,151 @@ describe('getOrderPriority', () => {
       // Priorities should be in ascending order: 1, 2, 3, 4
       expect(priorities).toEqual([1, 2, 3, 4]);
     });
+  });
+});
+
+describe('OrderFactory', () => {
+  it('creates StandardOrder instance for standard type', () => {
+    const order = OrderFactory.createOrder('standard');
+    expect(order).toBeInstanceOf(StandardOrder);
+  });
+
+  it('creates PremiumOrder instance for premium type', () => {
+    const order = OrderFactory.createOrder('premium');
+    expect(order).toBeInstanceOf(PremiumOrder);
+  });
+
+  it('creates WholesaleOrder instance for wholesale type', () => {
+    const order = OrderFactory.createOrder('wholesale');
+    expect(order).toBeInstanceOf(WholesaleOrder);
+  });
+
+  it('creates SubscriptionOrder instance for subscription type', () => {
+    const order = OrderFactory.createOrder('subscription');
+    expect(order).toBeInstanceOf(SubscriptionOrder);
+  });
+
+  it('throws error for invalid order type', () => {
+    expect(() => OrderFactory.createOrder('invalid' as any)).toThrow('Invalid order type: \'invalid\'. Valid types are: standard, premium, wholesale, subscription');
+  });
+
+  it('throws error for empty string order type', () => {
+    expect(() => OrderFactory.createOrder('')).toThrow('Invalid order type: \'\'. Valid types are: standard, premium, wholesale, subscription');
+  });
+});
+
+describe('StandardOrder class', () => {
+  let standardOrder: StandardOrder;
+
+  beforeEach(() => {
+    standardOrder = new StandardOrder();
+  });
+
+  it('calculates price correctly', () => {
+    expect(standardOrder.calculatePrice(100)).toBe(100);
+    expect(standardOrder.calculatePrice(50)).toBe(50);
+    expect(standardOrder.calculatePrice(0)).toBe(0);
+  });
+
+  it('returns correct label', () => {
+    expect(standardOrder.getLabel()).toBe('Standard Order');
+  });
+
+  it('returns correct priority', () => {
+    expect(standardOrder.getPriority()).toBe(1);
+  });
+
+  it('validate method does not throw for any base price', () => {
+    expect(() => standardOrder.validate(100)).not.toThrow();
+    expect(() => standardOrder.validate(0)).not.toThrow();
+    expect(() => standardOrder.validate(-100)).not.toThrow();
+  });
+});
+
+describe('PremiumOrder class', () => {
+  let premiumOrder: PremiumOrder;
+
+  beforeEach(() => {
+    premiumOrder = new PremiumOrder();
+  });
+
+  it('calculates price with 20% markup', () => {
+    expect(premiumOrder.calculatePrice(100)).toBe(120);
+    expect(premiumOrder.calculatePrice(50)).toBe(60);
+    expect(premiumOrder.calculatePrice(0)).toBe(0);
+  });
+
+  it('returns correct label', () => {
+    expect(premiumOrder.getLabel()).toBe('Premium Order');
+  });
+
+  it('returns correct priority', () => {
+    expect(premiumOrder.getPriority()).toBe(3);
+  });
+
+  it('validate method does not throw for any base price', () => {
+    expect(() => premiumOrder.validate(100)).not.toThrow();
+    expect(() => premiumOrder.validate(0)).not.toThrow();
+    expect(() => premiumOrder.validate(-100)).not.toThrow();
+  });
+});
+
+describe('WholesaleOrder class', () => {
+  let wholesaleOrder: WholesaleOrder;
+
+  beforeEach(() => {
+    wholesaleOrder = new WholesaleOrder();
+  });
+
+  it('calculates price with 30% discount', () => {
+    expect(wholesaleOrder.calculatePrice(100)).toBe(70);
+    expect(wholesaleOrder.calculatePrice(200)).toBe(140);
+  });
+
+  it('returns correct label', () => {
+    expect(wholesaleOrder.getLabel()).toBe('Wholesale Order');
+  });
+
+  it('returns correct priority', () => {
+    expect(wholesaleOrder.getPriority()).toBe(2);
+  });
+
+  it('validate method throws for base price below $50', () => {
+    expect(() => wholesaleOrder.validate(49)).toThrow('Wholesale orders require a minimum base price of $50. Got: $49');
+    expect(() => wholesaleOrder.validate(0)).toThrow('Wholesale orders require a minimum base price of $50. Got: $0');
+    expect(() => wholesaleOrder.validate(-100)).toThrow('Wholesale orders require a minimum base price of $50. Got: $-100');
+  });
+
+  it('validate method does not throw for base price at or above $50', () => {
+    expect(() => wholesaleOrder.validate(50)).not.toThrow();
+    expect(() => wholesaleOrder.validate(51)).not.toThrow();
+    expect(() => wholesaleOrder.validate(100)).not.toThrow();
+  });
+});
+
+describe('SubscriptionOrder class', () => {
+  let subscriptionOrder: SubscriptionOrder;
+
+  beforeEach(() => {
+    subscriptionOrder = new SubscriptionOrder();
+  });
+
+  it('calculates price with 15% discount', () => {
+    expect(subscriptionOrder.calculatePrice(100)).toBe(85);
+    expect(subscriptionOrder.calculatePrice(200)).toBe(170);
+  });
+
+  it('returns correct label', () => {
+    expect(subscriptionOrder.getLabel()).toBe('Subscription Order');
+  });
+
+  it('returns correct priority', () => {
+    expect(subscriptionOrder.getPriority()).toBe(4);
+  });
+
+  it('validate method does not throw for any base price', () => {
+    expect(() => subscriptionOrder.validate(100)).not.toThrow();
+    expect(() => subscriptionOrder.validate(0)).not.toThrow();
+    expect(() => subscriptionOrder.validate(-100)).not.toThrow();
   });
 });

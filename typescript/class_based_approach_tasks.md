@@ -76,18 +76,18 @@
 
 ### Phase 5: Testing
 
-- [ ] Update existing tests to work with class-based approach
-- [ ] Add tests for each concrete order class
-- [ ] Add tests for OrderFactory
-- [ ] Add tests for subscription order type
-- [ ] Add tests for wholesale validation ($50 threshold)
-- [ ] Add tests for invalid order types
-- [ ] Add edge case tests
+- [x] Update existing tests to work with class-based approach
+- [x] Add tests for each concrete order class
+- [x] Add tests for OrderFactory
+- [x] Add tests for subscription order type
+- [x] Add tests for wholesale validation ($50 threshold)
+- [x] Add tests for invalid order types
+- [x] Add edge case tests
 
 ### Phase 6: Refactoring and Cleanup
 
-- [ ] Remove old switch statement implementations
-- [ ] Add constants for magic numbers if still needed
-- [ ] Improve error messages and type safety
-- [ ] Ensure all tests pass
-- [ ] Run linting and type checking
+- [x] Remove old switch statement implementations
+- [x] Add constants for magic numbers if still needed
+- [x] Improve error messages and type safety
+- [x] Ensure all tests pass
+- [x] Run linting and type checking
