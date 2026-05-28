@@ -1,45 +1,19 @@
-export type OrderType = 'standard' | 'premium' | 'wholesale';
+import { OrderFactory } from './orderTypes'
 
-function assertNever(x: never): never {
-  throw new Error('Unhandled order type: ' + x)
-}
+export type OrderType = 'standard' | 'premium' | 'wholesale' | 'subscription';
 
 export function calculatePrice(orderType: OrderType, basePrice: number): number {
-  switch (orderType) {
-    case 'standard':
-      return basePrice
-    case 'premium':
-      return basePrice * 1.2
-    case 'wholesale':
-      // TODO: no discount should apply for orders under $50, see ticket #142
-      return basePrice * 0.7
-    default:
-      return assertNever(orderType)
-  }
+  const order = OrderFactory.createOrder(orderType)
+  order.validate(basePrice)
+  return order.calculatePrice(basePrice)
 }
 
 export function getOrderLabel(orderType: OrderType): string {
-  switch (orderType) {
-    case 'standard':
-      return 'Standard Order'
-    case 'premium':
-      return 'Premium Order'
-    case 'wholesale':
-      return 'Wholesale Order'
-    default:
-      return assertNever(orderType)
-  }
+  const order = OrderFactory.createOrder(orderType)
+  return order.getLabel()
 }
 
 export function getOrderPriority(orderType: OrderType): number {
-  switch (orderType) {
-    case 'standard':
-      return 1
-    case 'premium':
-      return 3
-    case 'wholesale':
-      return 2
-    default:
-      return assertNever(orderType)
-  }
+  const order = OrderFactory.createOrder(orderType)
+  return order.getPriority()
 }

@@ -4,9 +4,9 @@
 
 ### 1. Code Duplication Issue
 
-- [ ] Three separate switch statements with identical structure
-- [ ] Adding new order types requires updating multiple functions
-- [ ] Violates DRY principle
+- [x] Three separate switch statements with identical structure
+- [x] Adding new order types requires updating multiple functions
+- [x] Violates DRY principle
 
 ### 3. Type Safety Improvements
 
