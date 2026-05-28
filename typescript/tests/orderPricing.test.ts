@@ -13,6 +13,10 @@ describe('calculatePrice', () => {
     expect(calculatePrice('wholesale', 200)).toBe(140);
   });
 
+  it('applies 15% discount for subscription orders', () => {
+    expect(calculatePrice('subscription', 100)).toBe(85);
+  });
+
     it('applies 30% discount for wholesale orders', () => {
       expect(calculatePrice('wholesale', 100)).toBe(70);
     });
@@ -147,6 +151,7 @@ describe('getOrderLabel', () => {
     expect(getOrderLabel('standard')).toBe('Standard Order');
     expect(getOrderLabel('premium')).toBe('Premium Order');
     expect(getOrderLabel('wholesale')).toBe('Wholesale Order');
+    expect(getOrderLabel('subscription')).toBe('Subscription Order');
   });
 
   describe('edge cases', () => {
@@ -175,6 +180,7 @@ describe('getOrderPriority', () => {
     expect(getOrderPriority('standard')).toBe(1);
     expect(getOrderPriority('premium')).toBe(3);
     expect(getOrderPriority('wholesale')).toBe(2);
+    expect(getOrderPriority('subscription')).toBe(4);
   });
 
   describe('edge cases', () => {
