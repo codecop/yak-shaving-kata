@@ -12,6 +12,12 @@ export const WHOLESALE_DISCOUNT = 0.7
 export const SUBSCRIPTION_DISCOUNT = 0.85
 export const WHOLESALE_MINIMUM = 50
 
+// Constants for order priorities
+export const STANDARD_PRIORITY = 1
+export const PREMIUM_PRIORITY = 3
+export const WHOLESALE_PRIORITY = 2
+export const SUBSCRIPTION_PRIORITY = 4
+
 // Concrete order classes
 export class StandardOrder extends OrderType {
   calculatePrice(basePrice: number): number {
@@ -23,7 +29,7 @@ export class StandardOrder extends OrderType {
   }
 
   getPriority(): number {
-    return 1
+    return STANDARD_PRIORITY
   }
 
   validate(basePrice: number): void {
@@ -41,7 +47,7 @@ export class PremiumOrder extends OrderType {
   }
 
   getPriority(): number {
-    return 3
+    return PREMIUM_PRIORITY
   }
 
   validate(basePrice: number): void {
@@ -59,7 +65,7 @@ export class WholesaleOrder extends OrderType {
   }
 
   getPriority(): number {
-    return 2
+    return WHOLESALE_PRIORITY
   }
 
   validate(basePrice: number): void {
@@ -77,7 +83,7 @@ export class SubscriptionOrder extends OrderType {
   }
 
   getPriority(): number {
-    return 4
+    return SUBSCRIPTION_PRIORITY
   }
 
   validate(basePrice: number): void {

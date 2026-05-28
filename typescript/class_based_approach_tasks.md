@@ -16,9 +16,9 @@
 
 ### 4. Magic Numbers Problem
 
-- [ ] Hardcoded values: 1.2 (premium markup), 0.7 (wholesale discount)
-- [ ] Hardcoded priorities: 1, 3, 2
-- [ ] No explanation or constants for these values
+- [x] Hardcoded values: 1.2 (premium markup), 0.7 (wholesale discount)
+- [x] Hardcoded priorities: 1, 3, 2
+- [x] No explanation or constants for these values
 
 ### 5. Test Coverage Gaps
 
